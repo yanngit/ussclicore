@@ -2,14 +2,15 @@ from setuptools import setup,find_packages
 
 
 # Declare your packages' dependencies here, for eg:
-requires=['cmd2==0.6.7',
+requires=[
+            'cmd2==0.6.7',
             'argparse',
+            'progressbar==2.3',
+            'termcolor==1.1.0'
          ]
     
                     
-setup (  
-
-  
+setup (
   install_requires=requires,
   
   name = 'ussclicore',
