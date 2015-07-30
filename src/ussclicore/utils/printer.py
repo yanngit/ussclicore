@@ -10,6 +10,7 @@ from termcolor import colored,cprint
 WARNING="WARNING"
 ERROR="ERROR"
 OK="OK"
+INFO="INFO"
 
 def out(text, state=""):
         if state==WARNING:
@@ -18,5 +19,7 @@ def out(text, state=""):
                 cprint(ERROR+": ","red", attrs=['bold'], end=text+"\n")
         elif state==OK:
                 cprint(OK+": ","green", attrs=['bold'], end=text+"\n")
+        elif state==INFO:
+                cprint(INFO+": ","blue", attrs=['bold'], end=text+"\n")
         else:
                 print(text)
