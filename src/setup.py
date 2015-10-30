@@ -7,7 +7,8 @@ requires=[
             'cmd2==0.6.7',
             'argparse',
             'progressbar==2.3',
-            'termcolor==1.1.0'
+            'termcolor==1.1.0',
+            'hurry.filesize==0.9',
          ]
 
 if os.name != "nt":
