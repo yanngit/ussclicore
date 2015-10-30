@@ -1,5 +1,6 @@
 from setuptools import setup,find_packages
-
+import os
+import sys
 
 # Declare your packages' dependencies here, for eg:
 requires=[
@@ -8,13 +9,20 @@ requires=[
             'progressbar==2.3',
             'termcolor==1.1.0'
          ]
-    
+
+if os.name != "nt":
+    if not "linux" in sys.platform:
+        #mac os
+        requires.append('readline')
+else:   #On Windows
+    requires.append('pyreadline==2.0')
+
                     
 setup (
   install_requires=requires,
   
   name = 'ussclicore',
-  version = '1.0.2',
+  version = '1.0.3',
   description='UShareSoft cli core module',
   #long_description='',
   packages = find_packages(),
@@ -23,7 +31,7 @@ setup (
   license="Apache License 2.0",
   #url = '',
   classifiers=(
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
