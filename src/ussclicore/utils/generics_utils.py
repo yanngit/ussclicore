@@ -7,6 +7,7 @@ import re
 from os.path import expanduser
 import os
 import urllib
+import tempfile
 
 import download_utils
 import printer
@@ -82,7 +83,7 @@ def get_uforge_url_from_ws_url(ws_url):
                 return ws_url.rpartition('/')[0]
         else:
                 return ws_url[:-1].rpartition('/')[0]
-            
+
 def get_home_dir():
         return expanduser("~")
 
@@ -93,18 +94,19 @@ def get_remote_regex():
                 r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
                 r'(?::\d+)?' # optional port
                 r'(?:/?|[/?]\S+)$')
-    
-def get_file(uri):
+
+def get_file(uri, dest_file_name=None):
         try:
                 regexp = re.compile(get_remote_regex(), re.IGNORECASE)
                 if regexp.search(uri) is not None:
-                        print "Downloadling file "+os.path.basename(uri)+": "
-                        dlUtils = download_utils.Download()
-                        file, headers = urllib.urlretrieve(uri, reporthook=dlUtils.progress_update)
-                        dlUtils.progress_finish()
+                        dlUtils = download_utils.Download(uri, dest_file_name)
+                        try:
+                            dlUtils.start()
+                        except Exception, e:
+                            return 2
                 else:
-                        file, headers = urllib.urlretrieve(uri)
-                return file
+                        dest_file_name, headers = urllib.urlretrieve(uri)
+                return dest_file_name
         except Exception, e:
                 print("error downloading "+uri+": "+ str(e))
                 return
