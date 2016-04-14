@@ -4,7 +4,9 @@
 
 import json
 import re
+from os.path import abspath
 from os.path import expanduser
+from os.path import isfile
 import os
 import urllib
 import tempfile
@@ -105,7 +107,10 @@ def get_file(uri, dest_file_name=None):
                         except Exception, e:
                             return 2
                 else:
-                        dest_file_name, headers = urllib.urlretrieve(uri)
+                        dest_file_name = abspath(expanduser(uri))
+                        if not isfile(dest_file_name):
+                            printer.out("No such file "+uri, printer.ERROR)
+                            dest_file_name = None
                 return dest_file_name
         except Exception, e:
                 print("error downloading "+uri+": "+ str(e))
