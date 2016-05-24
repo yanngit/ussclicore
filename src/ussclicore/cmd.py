@@ -409,6 +409,15 @@ class Cmd(Cmd2, object):
                     if code:
                         return code
 
+	def join_args(self, args):
+		ret = ""
+		for arg in args:
+			if " " in arg:
+				ret += "'%s' " % arg
+			else:
+				ret += "%s " % arg
+		return ret.strip()
+
 	def onecmd_plus_hooks(self, line):
 		# The outermost level of try/finally nesting can be condensed once
 		# Python 2.4 support can be dropped.
