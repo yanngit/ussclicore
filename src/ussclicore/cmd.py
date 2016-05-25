@@ -469,3 +469,6 @@ class CoreGlobal:
                 self.login=login
                 self.password=password
 
+        def set_globals(self, api):
+                self.api=api
+
