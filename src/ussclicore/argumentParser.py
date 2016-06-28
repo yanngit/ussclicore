@@ -36,7 +36,7 @@ class ArgumentParser(argparse.ArgumentParser):
 	# Catch the system exit exception and return an empty object if the helper is called
 	def parse_args(self, args):
 		try:
-			super(ArgumentParser,self).parse_args(args)
+			return super(ArgumentParser,self).parse_args(args)
 		except SystemExit as e :
                         return
                         
